@@ -7,7 +7,6 @@ export class User {
         this.fecha_creacion = fecha_creacion;
     }
 
-    // Genera un ID random temporal para mostrar al usuario en frontend
     static generarCodigoVisual(): string {
         return "USR-" + Math.random().toString(36).substring(2, 7).toUpperCase();
     }

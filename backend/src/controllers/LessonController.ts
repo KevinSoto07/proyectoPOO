@@ -5,7 +5,6 @@ import { AppError } from '../middleware/errorHandler';
 
 export class LessonController {
 
-    // GET /api/lecciones — listar todas las lecciones
     static async listarLecciones(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const pool = Database.getInstance();
@@ -23,7 +22,6 @@ export class LessonController {
         }
     }
 
-    // GET /api/lecciones/:id — obtener lección con sus actividades
     static async obtenerLeccion(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { id } = req.params;

@@ -5,7 +5,6 @@ import { AppError } from '../middleware/errorHandler';
 
 export class UserController {
 
-    // POST /api/usuarios — crea un usuario random
     static async crearUsuario(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const pool = Database.getInstance();
@@ -27,7 +26,6 @@ export class UserController {
         }
     }
 
-    // GET /api/usuarios/:id — obtener usuario por ID
     static async obtenerUsuario(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const { id } = req.params;
