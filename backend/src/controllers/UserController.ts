@@ -48,4 +48,37 @@ export class UserController {
             next(new AppError('Error al obtener usuario', 500));
         }
     }
+
+
+    //Obtener nota global
+    static async obtenerNotaGlobal(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            const { id } = req.params;
+            const pool = Database.getInstance();
+
+            const [rows]: any = await pool.execute(
+            `SELECT
+                SUM(c.puntaje_obtenido) AS puntaje_total,
+                SUM(a.puntaje_maximo) As puntaje_maximo_total
+            FROM calificaciones c
+            INNER JOIN actividades a ON c.actividad_id = a.id
+            WHERE c.usuario_id = ?
+            `, [Number(id)]
+            );
+
+            const { puntaje_total, puntaje_maximo_total } = rows[0];
+
+            if (!puntaje_maximo_total) {
+                res.json({ nota_global: 0, mensaje: 'El usuario aún no tiene actividades completadas'})
+                return;
+
+            }
+
+            const nota_global = Math.round((puntaje_total / puntaje_maximo_total) * 100);
+
+            res.json({ usuario_id: Number(id), nota_global });
+        } catch (error) {
+            next(new AppError('Error al calcular la nota global', 500));
+        }
+    }
 }

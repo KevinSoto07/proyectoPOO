@@ -11,4 +11,7 @@ router.post('/', UserController.crearUsuario);
 // Obtener un usuario por ID (GET /api/usuarios/:id)
 router.get('/:id', UserController.obtenerUsuario);
 
+// Obtener la nota global del usuario GET /api/:id/nota
+router.get('/:id/nota', UserController.obtenerNotaGlobal);
+
 export default router;
