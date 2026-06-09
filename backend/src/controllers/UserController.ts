@@ -33,7 +33,7 @@ export class UserController {
 
             const [rows]: any = await pool.execute(
                 'SELECT * FROM usuarios WHERE id = ?',
-                [id]
+                [Number(id)]
             );
 
             if (rows.length === 0) {

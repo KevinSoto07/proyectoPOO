@@ -30,7 +30,7 @@ export class LessonController {
             // Trae la lección
             const [leccionRows]: any = await pool.execute(
                 'SELECT * FROM lecciones WHERE id = ?',
-                [id]
+                [Number(id)]
             );
 
             if (leccionRows.length === 0) {
@@ -40,7 +40,7 @@ export class LessonController {
             // Trae las actividades de esa lección
             const [actividadRows]: any = await pool.execute(
                 'SELECT * FROM actividades WHERE leccion_id = ? ORDER BY orden',
-                [id]
+                [Number(id)]
             );
 
             const fila = leccionRows[0];
