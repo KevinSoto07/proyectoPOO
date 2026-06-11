@@ -4,7 +4,7 @@ import Header from '../components/Header';
 
 // Estos componentes los harán los otros integrantes
 // Los importamos ya para que el archivo compile cuando estén listos
-// import LessonCard  from '../components/LessonCard';
+ import LessonCard  from '../components/LessonCard';
 // import ScoreModal  from '../components/ScoreModal';
 
 const HomePage = () => {
@@ -117,25 +117,18 @@ const HomePage = () => {
       <main className="max-w-3xl mx-auto px-4 py-8 space-y-4">
         {lecciones.map((leccion) => (
           // Cuando LessonCard esté listo, reemplazar este div por el componente:
-          // <LessonCard
-          //   key={leccion.leccion_id}
-          //   leccion={leccion}
-          //   isExpanded={expandedId === leccion.leccion_id}
-          //   onToggle={() => handleToggleLeccion(leccion.leccion_id)}
-          //   usuarioId={usuarioId!}
-          //   actividadesRespondidas={actividadesRespondidas}
-          //   onRespuestaGuardada={handleRespuestaGuardada}
-          // />
+           <LessonCard
+             key={leccion.leccion_id}
+             leccion={leccion}
+             isExpanded={expandedId === leccion.leccion_id}
+             onToggle={() => handleToggleLeccion(leccion.leccion_id)}
+             usuarioId={usuarioId!}
+             actividadesRespondidas={actividadesRespondidas}
+             onRespuestaGuardada={handleRespuestaGuardada}
+          />
 
           // Placeholder temporal para que el archivo compile:
-          <div
-            key={leccion.leccion_id}
-            className="bg-bgCard border border-borderNormal rounded-xl p-5"
-          >
-            <p className="text-textPrimary font-medium">
-              Lección {leccion.leccion_numero}: {leccion.leccion_nombre}
-            </p>
-          </div>
+
         ))}
       </main>
 
