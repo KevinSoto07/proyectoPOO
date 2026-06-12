@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ActivityItem from './ActivityItem';
 
 interface Actividad {
   actividad_id: number;
@@ -96,7 +97,7 @@ Números ordinales (indican posición):
   },
 };
 
-export default function LessonCard({ leccion, isExpanded, onToggle }: Props) {
+export default function LessonCard({ leccion, isExpanded, onToggle, usuarioId, onRespuestaGuardada }: Props) {
   const [explicacionAbierta, setExplicacionAbierta] = useState(false);
   const explicacion = explicaciones[leccion.leccion_numero];
 
@@ -204,20 +205,22 @@ export default function LessonCard({ leccion, isExpanded, onToggle }: Props) {
           {leccion.actividades && leccion.actividades.length > 0 && (
             <div className="mt-4">
               <span className="text-xs text-gray-400 uppercase tracking-wide">Actividades</span>
-              <ul className="mt-2 space-y-2">
+              <div className="mt-2 space-y-2">
                 {leccion.actividades.map((act) => (
-                  <li
+                  <ActivityItem
                     key={act.actividad_id}
-                    className="p-3 rounded-md border border-[#21262d] text-sm text-gray-300"
-                    style={{ backgroundColor: "#0d1117" }}
-                  >
-                    <span className="font-medium text-white">{act.actividad_orden}. {act.actividad_nombre}</span>
-                    {act.actividad_descripcion && (
-                      <p className="mt-1 text-gray-400">{act.actividad_descripcion}</p>
-                    )}
-                  </li>
+                    actividad={{
+                      id: act.actividad_id,
+                      nombre: act.actividad_nombre,
+                      descripcion: act.actividad_descripcion,
+                      puntaje_maximo: act.puntaje_maximo,
+                      orden: act.actividad_orden,
+                    }}
+                    usuarioId={usuarioId}
+                    onRespuestaGuardada={onRespuestaGuardada}
+                    />
                 ))}
-              </ul>
+              </div>
             </div>
           )}
 
@@ -226,3 +229,13 @@ export default function LessonCard({ leccion, isExpanded, onToggle }: Props) {
     </div>
   );
 }
+/*<li
+  key={act.actividad_id}
+  className="p-3 rounded-md border border-[#21262d] text-sm text-gray-300"
+  style={{ backgroundColor: "#0d1117" }}
+>
+  <span className="font-medium text-white">{act.actividad_orden}. {act.actividad_nombre}</span>
+  {act.actividad_descripcion && (
+    <p className="mt-1 text-gray-400">{act.actividad_descripcion}</p>
+  )}
+</li>*/
