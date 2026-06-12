@@ -125,9 +125,7 @@ const HomePage = () => {
              usuarioId={usuarioId!}
              actividadesRespondidas={actividadesRespondidas}
              onRespuestaGuardada={handleRespuestaGuardada}
-          />
-
-          // Placeholder temporal para que el archivo compile:
+          /> 
 
         ))}
       </main>
