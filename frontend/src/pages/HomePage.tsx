@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchLecciones, type LeccionConActividades } from '../api/api';
 import Header from '../components/Header';
+import ScoreModal from '../components/ScoreModal';
 
 // Estos componentes los harán los otros integrantes
 // Los importamos ya para que el archivo compile cuando estén listos
@@ -130,43 +131,33 @@ const HomePage = () => {
         ))}
       </main>
 
-      {/* Botón Mostrar Calificación */}
+{/* Botón Mostrar Calificación (Ya lo tienes, asegúrate de que esté así) */}
       <div className="fixed bottom-6 left-0 right-0 flex justify-center">
         <button
           onClick={() => todasRespondidas && setShowModal(true)}
           className={`
             flex items-center gap-2 px-6 py-3 rounded-full font-medium
-            transition-all duration-300 text-sm
+            transition-all duration-300 text-sm shadow-lg
             ${todasRespondidas
-              ? 'bg-accentGreen text-bgBase cursor-pointer hover:brightness-110'
-              : 'bg-accentGreenDark text-textMuted cursor-not-allowed opacity-70'
+              ? 'bg-[#39d98a] text-[#0d1117] cursor-pointer hover:scale-105'
+              : 'bg-[#1e3a2b] text-gray-500 cursor-not-allowed opacity-70'
             }
           `}
+          disabled={!todasRespondidas}
         >
-          {/* Ícono medalla */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            className="w-4 h-4"
-          >
-            <circle cx="12" cy="8" r="6" />
-            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
-          </svg>
+          {/* SVG de medalla... */}
           Mostrar Calificación
         </button>
       </div>
 
-      {/* Modal — cuando ScoreModal esté listo, descomentar:
+      {/* 2. Descomenta y configura el ScoreModal al final */}
       {showModal && usuarioId && (
         <ScoreModal
           usuarioId={usuarioId}
           isOpen={showModal}
           onClose={() => setShowModal(false)}
         />
-      )} */}
+      )}
     </div>
   );
 };
